@@ -1,0 +1,93 @@
+\chapter{\textsc{Abstract Data Types}}
+\section{Elements and tuples}
+In Computer Science, \emph{datum} (data in plural) is a reference with a representation (syntax)  which is stored in a memory. Datum $a$ may be considered (semantically) as an element or object in some universe of discourse, i.e., universal set $U$, we write $a \in U$. When $A \subseteq U$ and $a \in U$, then $a$ carries some \emph{information} determined by $A$. The set $A$ is understood as a \emph{concept}.
+
+\begin{example}
+Consider a datum $a$ which semantically is an element in a set of digital cars (which is a universal set). One might say that $a$ is an \emph{instance of an object class ``digital car''}. However, the digital car $a$ might be considered as an object whose properties are stored in computer memory in very many memory blocks. Naturally, each memory block should be referred somehow (by variables!) and in this sense there are datum semantically forming this digital car $a$.
+\end{example}
+
+\begin{example}
+An element 5 may be interpreted in many different ways: $5 \in r$ or $5 \in \mathbb{N}$.
+\end{example}
+
+\begin{example}
+When data is processed, it is usually obligatory to know in which universal set each datum belongs. For example, the term (expression) $5+4$ is not reasonable if $4,5 \in \mathbf{S}$ ($\mathbf{S}$ is the set of arabic digits) and ``$+$'' is an operator on natural numbers. The operator ``$+$'' and $4,5$ are not compatible.
+\end{example}
+
+Sometimes a datum may be a \emph{tuple}. A tuple (or n-tuple) is an element of a product set, thus, $\left(a_1, \dots ,a_n \right) \in U_1 \times\cdots\times U_n$.
+
+\begin{example}
+If $V$ is a set of color names, and $M$ is a set of men's names, then $a=\left(75,\text{gray},\text{Jari} \right) \in \mathbb{N} \times V \times W$. One might say that tuple is a multidimensional datum.
+\end{example}
+
+\section{Memory and variables}
+In program languages, data is stored in computer memory and data is processed using symbols called \emph{variables}. From a programmer point of view, a variable is a container, label, or frame. A variable (only a symbol) refers to a datum.\par 
+Program language compiler should transmit variable (symbol) to the operation system which then reserves on or more memory blocks to this symbol. Variable then refers to contents in computer memory block(s) having certain address(s), in which a datum is stored.\par 
+The use of variables in some context then serves as \emph{access} to corresponding data. As we have seen, datum is always of some type in the sense that the applicable processing methods variate.
+
+\begin{example}
+We have two variables $x$ and $y$, which refers to computer memory and there are datum. Remember that in computer memory blocks ONLY BITS ARE STORED. How the compiler of the current language ``knows'' that a program clause $z:=x+y$ (or cannot) be processed in a reasonable (in the sense of current program) way?
+\end{example}
+
+In program languages, the variables must be \emph{typed}. There are weakly and strongly typed program languages. \note Operators demand data types and they know themselves the type.
+
+\section{Variables and data types}
+The first clauses in a program are often declaring of variables and their types, like \verb|x::integer| or \verb|y::float|. After that, variable assignment can be processed; in this presentation, values of variables (variable assignment) are given by \verb|:=| symbol, for example \verb|x:=0|.\par 
+A \emph{data type s} is a symbolic name, which has a set $A$ with operations $O$ on that set as its semantics. The operations usually satisfy some laws, so, semantics of $s$ is some specified algebra $\mathcal{A}=\left(A,O \right)$. A variable $x$ of type $s$, written \verb|x::s|, will be assigned to an element $a \in A$ interpreted as \emph{a point in the algebra $\mathcal{A}$}, so we write \verb|x:=| $x$.
+
+\begin{example}
+clauses \verb|y::float| and \verb|y:=5| together stores 5 in some specified memory block, but 5 is understood now as a real number. So, the bits in this memory block are handled as a floating point number.
+\end{example}
+
+\begin{example}
+The clauses \verb|z::char| and \verb|z:='c'| together could store the ASCII-code of the letter c.
+\end{example}
+
+\begin{example}
+If an operation $\omega$ takes values of data types $s_1, \ldots ,s_n$ and produces values of data type $t$ then this is often written as $\omega : s_1 \times\ldots\times s_2 rightarrow t$. In this case, data types may have a many-sorted algebra as their semantics.
+\end{example}
+
+\note Some program languages (e.g. Python/Sage) process data as OBJECTS (object-oriented languages). Then, variables are often allowed to have \emph{aliases} by default.
+
+\begin{example}
+In a clause \verb|x:=5| the symbol \verb|x| refers to a memory block containing object 5 (must be created); this object has a ``nametag'' \verb|x|, i.e. this object is allowed to be referred by other variables also without copying the datum. This referencing method differs from symbol \verb|x| being a ``label of box'' which contains 5.
+\end{example}
+
+%\section{Advantages of typing}
+%Programmers can focus on program language syntax and create the program syntactically using variables of reasonable data types and their operations. Unnecessary restrictions will be removed.\par 
+%Program languages have primitive data types (built-in data types) which define a kind of user interface to memory blocks. Which restrictions the hardware determines?\par When data types are used effectively then \emph{type erros} are avoided. For example,  leet \verb|x::interger| and \verb|y,z::char|. Then the clause \verb|z:=x+y| is reasonable if the operation ``+'' is of the form $+ \, : \text{integer} \times \text{char} \rightarrow \text{char}$.
+
+\section{Data structures}
+\subsection{What is data structure?}
+Usually programs handle a large collection of different kinds of data from data type point of view. Some data may form an entity of its own, a datum, which may be called as \emph{data aggregate}. Data aggregate is referred by one variable.\par 
+The data itself is naturally stored in different memory blocks, but it is now reasonable to assume that there must be some relation between elements, because the data aggregate is a datum itself.\par 
+\emph{Data structure} is a way of organizing data such that data aggregate may be stored in and accessed from the memory efficiently and in a reasonable way from application point of view. The structure may be expressed as a relation between elements.
+\subsection{Tuple} 
+One of the simplest data structure is \emph{tuple}. Tuples are elements of a product set and in this sense it is a data aggregate. The elements in the tuple are not changeable (tuples are immutable) and the relation between elements is the identity relation.\par 
+\note In a tuple each element may be of different data types. It might be possible to declare $x:: s_1, \dots ,s_n$ if $x$ would create a new type from the existing ones (type constructor).
+\subsection{Array}
+\emph{Array} is a data structure, where the elements have position numbers. The size of an array is fixed, but elements are changeable (arrays are mutable). There are no other specific methods to manipulate arrays.\par 
+In a more detail, an array $f$ with the size of $n$ position is a function, such that $f(i)$ is an element at the position number $i$, thus, $f:\lbrace 0,1,\ldots ,n-1 rbrace rightarrow S$, when the stored elements are members in $S$.\par 
+The structure is now given as a function producing a linear order between the elements. Quite often arrays are declared like \verb|x::array[0..n]| of \verb|s|, where \verb|s| is some data type. For example, \verb|x:=[3,4,5]| would assign a 3-placed array to \verb|x| declared by \verb|x::array[0..2]| of \verb|s|, where \verb|s| represents integer data type.\par 
+For \emph{many-dimensional arrays}, one uses many different indices to position the elements. Notice that some modern program language do not demand array declarations, but the form of writing declares the array themselves.\par 
+If the array is declared, however, to be the size of $n$ positions then the operating system reserves $n$ memory blocks from the memory, even if the program would not need them all.
+
+\section{Abstract data type}
+Primitive data types, like integer or float, are sets with operations such that they are defined by hardware, operating system or compilers. These kinds of data types are called ``built-in'' such that the corresponding algebras are implemented in hardware, operating system, or compiler.\par 
+An \emph{abstract data type} $s$ is a symbolic name, which has a collection of \emph{mathematically isomorphic algebras} as its semantics, i.e. the operations defined for these algebras behave in a similar manner and the underlying sets are bijective.
+
+\begin{example}
+An abstract data type \emph{bool} has a collection of all 2-element Boolean algebras (mathematically isomorphic algebras) as its semantics. For example, \emph{bookl} might have algebras like $B_1=\lbrace 0,1 rbrace$ and $B_2=\lbrace \text{True},\text{False} rbrace$ with the operations on these sets behaving in the same way (like connectives in Propositional Logic).
+\end{example}
+
+\begin{example}
+Consider a program language with an abstract data type \emph{bool}. The  collection of all 2-element Boolean algebras is isomorphic to $\mathcal{B}=\left( B_2,\ast , +, ',F,T \right)$ as its semantics. In this program language, the syntactic operations for bool-type are $\ast , +, ',F,T$ where $F$ is the zero element and $T$ is the unit element. We have:
+\begin{verbatim}
+x,y,z::bool
+z = x * y
+WHILE z == T
+...
+ENDWHILE
+\end{verbatim}
+These program clauses are independent from the actual implementation: it does not matter which 2-element Boolean algebra there is implemented.
+\end{example}
