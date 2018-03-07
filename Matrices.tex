@@ -277,12 +277,29 @@ Replace the first row $R_1$ by $R_1+\dfrac{1}{2}R_3$
 \subsection{Orthogonal projection}
 The orthogonal projection of $\vect{v}$ onto the line spanned by a nonzero $\vect{s}$ (see figure \ref{Linalg_projection}) is: 
 \[ \vect{v}_{\vect{s}}=\frac{\vect{v}\cdot\vect{s}}{\norm{s}^2} \, \vect{s} \]
+
 \begin{figure}[hbtp]
 \caption{Orthogonal projection}
 \label{Linalg_projection}
 \centering
-\includegraphics[width=0.5\textwidth]{Linalg_projection_4.png}
+    \begin{tikzpicture}
+	\tkzInit[xmin=-1,xmax=6,ymin=-1,ymax=6]
+	\tkzDrawX[noticks] \tkzDrawY[noticks]
+	\tkzDefPoint(0,0){O} \tkzDefPoint(3,4){A} \tkzDefPoint(2,0.5){B}
+	\tkzDefPoint(-0.5,-0.125){C} \tkzDefPoint(4,1){D}
+	\tkzDefPointBy[projection=onto O--C](A) \tkzGetPoint{P}
+	\tkzDrawVectors(O,A O,B O,P)
+	\tkzDrawLine(C,D)
+	\tkzDrawSegment(A,P)
+	\tkzLabelSegment[above=3pt](O,A){$\vect{u}$}
+	\tkzLabelSegment[below=1pt](O,B){$\vect{v}$}
+	\tkzLabelSegment[above=1pt](O,P){$\vect{v}_{\vect{s}}$}
+	\tkzLabelAngle[pos = 0.5](B,O,A){$\alpha$}
+	\tkzMarkAngle[fill= yellow,size=0.75cm,opacity=.3](B,O,A)
+	\tkzMarkRightAngle(C,P,A)
+	\end{tikzpicture}
 \end{figure}
+
 \subsection{Linear least squares}
 Let $\vect{A}$ be an $m\times n$ matrix, $\vect{x}$ be an $n\times 1$ matrix and b be an $m\times 1$ matrix. Solve the matrix equation $\vect{A}\vect{x}=\vect{b}$.\par 
 If $m=n$, we can use three methods mentioned in section \ref{linear-eq}. However, if $m>n$, the the solution usually does not exist. But if the columns of $\vect{A}$ form a linearly independent set, then 
@@ -303,7 +320,6 @@ rotates points in the xy-plane counterclockwise through an angle $\alpha$ about 
 \cvect{x',y'}=\smtrx{\cos\alpha,-\sin\alpha\\ \sin\alpha,\cos\alpha}\cvect{x,y}
 \end{equation*}
 So the new coordinates $\left( x',y' \right)$ of the point $\left( x,y \right)$ after rotation are
-are
 \[
  x'=x\cos \alpha -y\sin \alpha \, \quad
  y'=x\sin \alpha +y\cos \alpha \,.
@@ -321,7 +337,7 @@ Let $\vect{y}$ be the vector of the movement and $\vect{x}$ be the distance betw
 \begin{meq*}
 \vect{x} &=& \vect{Q}-\vect{P}=(4,10,5)-(2,5,3)=(2,5,2) \\
 \norm{x} &=& \sqrt{2^2+5^2+2^2}=\sqrt{33},\quad \uvect{x}=\frac{1}{\sqrt{33}}(2,5,2) \\
-\vect{y} &=& \vect{P}+3\uvect{x}=(2,5,3)+\frac{3}{\sqrt{33}}(2,5,2)
+\vect{y} &=& \vect{P}+3\uvect{x}=(2,5,3)+\frac{3}{\sqrt{33}}(2,5,2) \qedhere 
 \end{meq*}
 \end{solution}
 
@@ -333,7 +349,7 @@ Let $\vect{a}=(2,4)$ and $\vect{b}=(1,-3)$ be vectors in $\mathbb{R}^2$. If thes
 Let $\vect{A}$ be the matrix formed by $\vect{a}$ and $\vect{b}$
 \[ \vect{A}=\smtrx{2,1\\4,-3} \]
 The area of the parallelogram is the absolute value of the determinant of $\vect{A}$
-\[ S=\vert \dt{A}\vert = \vert 2(-3)-4\cdot 1 \vert =10 \]
+\[ S=\vert \dt{A}\vert = \vert 2(-3)-4\cdot 1 \vert =10 \qedhere \]
 \end{solution}
 
 \begin{exercise}
@@ -341,7 +357,7 @@ Suppose we want to draw a best fitting line through three points (4,-2), (5,0), 
 \end{exercise}
 
 \begin{solution}
-The linear function $y=t+kx$ should satisfies the following system of equations with the minimum error:
+The linear function $y=kx+t$ should satisfies the following system of equations with the minimum error:
 \begin{equation}
 \label{LSM-linear}
 \begin{cases}
@@ -384,14 +400,71 @@ show(S+P)
 {131/65*x-129/13};
 
 %Here the blue parabloa is defined
-\addplot[
-    color=black,mark=square
-    ]
+\addplot[color=blue,mark=square]
 coordinates {
 (4,-2) (5,0) (5,-1) (6,4) (7,5) (8,5)
 };
 \end{axis}
 \end{tikzpicture}
+\end{solution}
+
+\begin{exercise}
+Suppose we want to draw a best 4th order polynomial line through 6 points $(7,9),(6,12),(4,4),(2,-1),(-1,0),(6,16)$.% Determine this function by means of the Method of Least Squares (LSM). Perform calculations by SAGE and plot the points and the line in the same coordinate system.
+\end{exercise}
+
+\begin{solution}
+We need to find the coefficients of the following polynomial
+\[ y=mx^4+nx^3+px^2+qx+r \]
+Substitue $x$ and $y$ to this polynomial, we obtain a system of equations:
+\begin{equation*}
+\begin{cases}
+2401m+343n+49p+7q+r &=9\\
+1296m+216n+36p+6q+r &=12\\
+256m+64n+16p+4q+r &=4\\
+16m+8n+4p+2q+r &=-1\\
+m-n+p-q+r&=0\\
+1296m+216n+36p+6q+r &=16
+\end{cases}
+\end{equation*}
+,which is equivalent to the follwoing matrix equation
+\[ \smtrx{2401,343,49,7,1\\1296,216,36,6,1\\256,64,16,4,1\\16,8,4,2,1\\1,-1,1,-1,1\\1296,216,36,6,1} \cvect{m,n,p,q,r} = \cvect{9,12,4,-1,0,16} \]
+Using formula \eqref{least-square}, we now can perform calculations by SAGE as follow:
+\begin{verbatim}
+A=matrix([[2401,343,49,7,1],[1296,216,36,6,1],[256,64,16,4,1],
+        [16,8,4,2,1],[1,-1,1,-1,1],[1296,216,36,6,1]])
+b=matrix([[9,12,4,-1,0,16]]).T
+x=(A.T*A).inverse() * (A.T*b) 
+
+m=x[0][0]
+n=x[1][0]
+p=x[2][0]
+q=x[3][0]
+r=x[4][0]
+
+z=var("z")
+S=plot(m*z**4+n*z**3+p*z*z+q*z+r, (z,-2,8))
+P = scatter_plot([[7,9],[6,12],[4,4],[2,-1],[-1,0],[6,16]])
+show(S+P)
+\end{verbatim}
+\end{solution}
+
+\begin{exercise}\label{change-origin}
+Let $\vect{p}_0 \in \mathbb{R}^2$ be such that $\vect{p}_0 =(5,3)$ and the corresponding point in $\mathbb{R}^2$ is $P(5,3)$. We define the function $f:\mathbb{R}^2\rightarrow\mathbb{R}^2$ such that $f(\vect{x})=\vect{x}-\vect{p}_0$. Calculate $f((0,0)),f((-5,9)),f((\vect{p}_0))$. Define the meaning of this function.
+\end{exercise}
+
+\begin{solution}
+This function moves the origin of the coordinate system from $O(0,0)$ to $P(5,3)$, and then calculates the new coordinate of vector $\vect{x}$. For example, the coordinate of $O(0,0)$ in the new coordinate system is $f((0,0))=(-5,3)$. Point $(-5,9)$ now becomes $f((-5,9))=(-10,6)$. And, of course, because $P(5,3)$ becomes the origin of the coordinate system, its coordinate is $(0,0)$.
+\end{solution}
+
+\begin{exercise}
+Suppose we have a cube in $\mathbb{R}^3$ such that the vertices are at the point (0,0,0), (0,0,1), (1,0,0), (1,0,1), (1,1,0) and (1,1,1). Determine a function $f:\mathbb{R}^{3\times8}\rightarrow\mathbb{R}^{3\times8}$ such that cube is centered at the origin of the coordinate system O(0,0,0), thus the center of the cube is mapped to 0.
+\end{exercise}
+
+\begin{solution}
+We write each point of the cube as a column in a single matrix $C_0$:
+\[ \vect{C}=\smtrx{0,0,0,0,1,1,1,1\\0,0,1,1,0,0,1,1\\0,1,0,1,0,1,0,1} \]
+The center of the cube is $C_0=(1/2,1/2,1/2)$. The function $f$ moves the origin of the coordinate from point O(0,0,0) to $C_0$. According to exercise \ref{change-origin}, that function is 
+\[ f(\vect{C})=\vect{C} - \cvect{1/2,1/2,1/2}\rvect{1,1,1,1,1,1,1,1} \]
 \end{solution}
 
 \begin{exercise}
