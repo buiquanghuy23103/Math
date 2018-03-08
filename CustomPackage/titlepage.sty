@@ -1,0 +1,56 @@
+\providecommand{\HUGE}{\Huge}% if not using memoir
+\newlength{\drop}
+\newcommand*{\wb}[2]{\fontsize{#1}{#2}\usefont{U}{webo}{xl}{n}}
+%% select a (FontSite) font by its font family ID
+\newcommand*{\FSfont}[1]{\fontencoding{T1}\fontfamily{#1}\selectfont}
+%% if you don’t have the FontSite fonts either 
+\renewcommand*{\FSfont}[1]{}
+%% or use your own choice of family.
+%% select a (TeX Font) font by its font family ID
+\newcommand*{\TXfont}[1]{\fontencoding{T1}\fontfamily{#1}\selectfont}
+%% Generic publisher’s logo
+\newcommand*{\plogo}{\fbox{$\mathcal{PL}$}}
+
+\makeatletter
+%%%% light series
+%% e.g., kernel doc, section s: line 12 or thereabouts
+\DeclareRobustCommand\ltseries
+{\not@math@alphabet\ltseries\relax
+\fontseries\ltdefault\selectfont}
+%% e.g., kernel doc, section t: line 32 or thereabouts
+\newcommand{\ltdefault}{l}
+%% e.g., kernel doc, section v: line 19 or thereabouts
+\DeclareTextFontCommand{\textlt}{\ltseries}
+% heavy(bold) series
+\DeclareRobustCommand\hbseries
+{\not@math@alphabet\hbseries\relax
+\fontseries\hbdefault\selectfont}
+\newcommand{\hbdefault}{hb}
+\DeclareTextFontCommand{\texthb}{\hbseries}
+\makeatother
+%==============================
+\newcommand*{\titleAT}[1]{\begingroup% Anatomy of a Typeface
+\FSfont{5bp} % FontSite Bergamo (Bembo)
+\drop=0.1\textheight
+\vspace*{\drop}
+\rule{\textwidth}{1pt}\par
+\vspace{2pt}\vspace{-\baselineskip}
+\rule{\textwidth}{0.4pt}\par
+\vspace{0.5\drop}
+\centering
+\textcolor{red}{
+{\FSfont{5ml} % FontSite Mona Lisa
+\Huge THE NOTEBOOK}\\[0.5\baselineskip]
+{\FSfont{5ml}
+\Large OF}\\[0.75\baselineskip]
+{\FSfont{5ml}
+\Huge #1}}\par
+\vspace{0.25\drop}
+\rule{0.3\textwidth}{0.4pt}\par
+\vspace{\drop}
+{\Large \scshape Huy Bui}\par
+\vfill
+{\large \textcolor{red}{\plogo}}\\[0.5\baselineskip]
+{\large\scshape the publisher}\par
+\vspace*{\drop}
+\endgroup}

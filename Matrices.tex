@@ -188,29 +188,10 @@ For matrices $\vect{A}\vect{B}$ and scalar $k$, we have the following properties
 \begin{itemize}
 \item The operation of taking the transpose is an involution (self-inverse), meaning that $\trans{\left( \trans{A} \right)}=\vect{A}$.
 \item The transpose respects addition, $\trans{\left( \vect{A}+\vect{B} \right)}=\trans{A}+\trans{B}$.
-\item The order of the factors reverses when taking tranpose of a product matrix, $\trans{\vect{A}\vect{B}}=\trans{B}\trans{A}$. From this one can deduce that a square matrix $\vect{A}$ is invertible if and only if its transpose $\trans{A}$ is invertible, and in this case, we have $\trans{\left( \inverse{A} \right)}=\inverse{\left( \trans{A} \right)}$.
-\item $\trans{c\vect{A}}=c\trans{A}$.
+\item The order of the factors reverses when taking tranpose of a product matrix, $\trans{\vect{A}\vect{B}}=\trans{B}\trans{A}$. From this, one can deduce that a square matrix $\vect{A}$ is invertible if and only if its transpose $\trans{A}$ is invertible, and in this case, we have $\trans{\left( \inverse{A} \right)}=\inverse{\left( \trans{A} \right)}$.
+\item $\trans{\left( c\vect{A} \right)}=c\trans{A}$.
 \end{itemize}
-\subsection{Inner product, norm, and unit vector}
-Let $X$ be a vector space. If one can define a binary operation $\cdot \, : X \times X \rightarrow \mathbb{R}$ (take 2 matrices and produce a scalar) such that $\forall \vect{w},\vect{u},\vect{v}\in X$ and $\forall s\in \mathbb{R}$, we have:
-\begin{equation*}
-\begin{cases}
-    \vect{u} \cdot \vect{v} &= \vect{v} \cdot \vect{u} \\
-    \vect{u} \cdot \left( \vect{v}+\vect{w} \right) &= \vect{u} \cdot \vect{v} + \vect{u} \cdot \vect{w} \\
-    s\left( \vect{u} \cdot \vect{v} \right) &= \left( s\vect{u} \right)\cdot \vect{v}=\vect{u} \cdot \left( s\vect{v} \right) \\
-    \vect{u} \cdot \vect{u} & \geqslant 0 \\
-    \vect{u} \cdot \vect{u} = 0 \Leftrightarrow \vect{u}=0
-\end{cases}
-\end{equation*}
-then $X$ is called inner product space. The binary operation $\cdot$ is called inner product. Now, for any matrix $\vect{u}\in X$, one can define inner product norm $\norm{u}$ by \[ \norm{u}=\sqrt{\vect{u} \cdot \vect{u}} \]
-For any two matrices $\vect{u},\vect{v}\in X$, we have \[ \vect{u} \cdot \vect{v} = \norm{u}\norm{v}\cos \alpha \]
-A vector whose norm is 1, is called a unit vector. One can define a unit vector $\uvect{x}$ by the following formula: \[ \uvect{x}=\frac{1}{\norm{x}}\vect{x} \]
-\begin{example}
-Vector $\vect{x}=(-2,5,3,6)$ has inner product norm of $\norm{x}=\sqrt{(-2)^2+5^2+3^2+6^2}=\sqrt{74}$. Thus, \[ \uvect{x}=\frac{1}{\norm{x}}\vect{x}=\frac{1}{\sqrt{74}} (-2,5,3,6) \]
-\end{example}
-\begin{example}
-Consider an object living in the 3D real place.
-\end{example}
+
 \section{Square matrices}
 \subsection{Definition}
 A matrix with the same number of rows as columns is called a \emph{square matrix}. A square matrix with \emph{n} rows and \emph{n} columns is said to be of \emph{order n}, and is called \emph{n-square matrix}. The diagonal of an n-square matrix $\vect{A}=\smtrx{a_{ij}}$ consists of elements $a_{11},a_{22},\ldots , a_{mn}$.
@@ -243,6 +224,15 @@ The determinants of matrices of order one, two, three are defined as follows:
 \dmtrx{a_{11},a_{12}\\a_{21},a_{22}} &=& a_{11}a_{22}-a_{12}a_{21}\\
 \dmtrx{a_{11},a_{12},a_{13}\\a_{21},a_{22},a_{23}\\a_{31},a_{32},a_{33}} &=& a_{11}a_{22}a_{33}+a_{21}a_{23}a_{31}+a_{13}a_{21}a_{32}-a_{13}a_{22}a_{31}-a_{12}a_{21}a_{33}-a_{11}a_{23}a_{32}
 \end{meq*}
+Below is another way to calculate determinant of a $3\times 3$ matrix:
+\begin{equation}\label{det-3matrix}
+\dmtrx{
+    a_{11},a_{12},a_{13}\\
+    a_{21},a_{22},a_{23}\\
+    a_{31},a_{32},a_{33}
+}
+= \dmtrx{a_{22},a_{23}\\a_{32},a_{33}} a_{11} - \dmtrx{a_{21},a_{23}\\a_{31},a_{33}} a_{12} + \dmtrx{a_{21},a_{22}\\a_{31},a_{32}} a_{13}
+\end{equation}
 In general, one can calculate determinant of an n-square matrix $\vect{A}$ using the following formula: \[ \dt{A}=\sum^n_{j=1} (-1)^{i+j}a_{ij} \dt{A_{ij}} \]
 Using determinant, we can calculate the inverse of an invertible matrix. For example, the inverse of a $2\times 2$ matrix with nonzero determinant can be calculated as follow: \[ \inverse{A}=\smtrx{a,b\\c,d}^{-1}=\frac{1}{\dt{A}} \smtrx{d,-b\\-c,a} \]
 For n-square matrix $\vect{A}=\smtrx{a_{ij}}$ with nonzero determinant, the inverse would be:
@@ -255,7 +245,7 @@ For n-square matrix $\vect{A}=\smtrx{a_{ij}}$ with nonzero determinant, the inve
 }
 \]
 where $c_{ij}=(-1)^{i+j} \dt{A_{ij}}$.\par 
-For matrices $\vect{A}\vect{B}$ and scalar $k \neq 0$, we have the following properties of determinants:
+For matrices $\vect{A},\vect{B}$ and scalar $k \neq 0$, we have the following properties of determinants:
 \begin{itemize}
 \item $\det (\vect{A}\vect{B})=\dt{A} \cdot \dt{B}$
 \item A \emph{square} matrix is invertible if and only if it has a nonzero determinant.
@@ -273,6 +263,88 @@ Multiply first row of $\vect{A}$ with 4 , we have matrix $\vect{B}$:
 Replace the first row $R_1$ by $R_1+\dfrac{1}{2}R_3$
 \[ \vect{B}=\smtrx{1,-5/2,3\\ 6,-3,-2\\ 4,1,2} \quad \dt{B}=\dt{A}=100 \]
 \end{example}
+\subsection{Eigenvectors and eigenvalues}
+Let $\vect{A}$ be an n-square matrix. The eigenvector of $\vect{A}$ is a column vector $\vect{x}$ that satisfies:
+\begin{equation*}
+\vect{A}\vect{x}=\lambda\vect{x}
+\end{equation*}
+Let us start to find $\vect{x}$ such that
+\begin{meq*}
+\vect{A}\vect{x} &=& \lambda\vect{x} \\
+\Leftrightarrow \vect{A}\vect{x}-\lambda\vect{x} &=& \vect{0} \\
+\Leftrightarrow \left( \vect{A}-\lambda\vect{I} \right)\vect{x} &=& \vect{0} \\
+\end{meq*}
+where $\vect{I}$ is the identity matrix living in the same vector space with $\vect{A}$. There are infinite number of solutions for $\vect{x}$ if there exists $\lambda$ that makes $\det \left( \vect{A}-\lambda\vect{I} \right) =0$. In that case, $\lambda$ is called eigenvalue associated with the eigenvector $\vect{x}$.
+\begin{example}
+To calculate the eigenvalues and eigenvectors of $\vect{A}=\smtrx{2,1\\1,4}$, we need to solve the following equation:
+\begin{meq*}
+\det \left( \vect{A}-\lambda\vect{I} \right) =0 &\Leftrightarrow & \dmtrx{2-\lambda,1\\1,4-\lambda}=0 \\
+\Leftrightarrow (2-\lambda)(4-\lambda)=0 &\Leftrightarrow & {\lambda}^2-6\lambda +7=0 \\
+\Leftrightarrow {\lambda}_1=3+\sqrt{2} &\quad\text{and}\quad & {\lambda}_2=3-\sqrt{2}
+\end{meq*}
+If the eigenvalue is ${\lambda}_1=3+\sqrt{2}$, then 
+\begin{IEEEeqnarray*}{l}
+\left( \vect{A}-\lambda\vect{I} \right)\vect{x} = \vect{0} \\
+\Leftrightarrow 
+	\begin{cases}
+	    \left( 2-\left( 3+\sqrt{2} \right) \right)x_1+x_2 &=0\\
+	    x_1+\left( 2-\left( 3+\sqrt{2} \right) \right)x_2 &=0
+	\end{cases}\\
+\Leftrightarrow x_1 = \left( 1+\sqrt{2} \right)x_2	
+\end{IEEEeqnarray*}
+Eigenvectors corresponding to ${\lambda}_1=3+\sqrt{2}$ are
+\[ \vect{x}=\cvect{1,1+\sqrt{2}}k, \quad k\in\mathbb{R}\backslash\lbrace 0 \rbrace \]
+\end{example}
+\section{Vector operations}
+\subsection{Inner product}
+Let $X$ be a vector space. If one can define a binary operation $\cdot \, : X \times X \rightarrow \mathbb{R}$ (take 2 vectors and produce a scalar) such that $\forall \vect{w},\vect{u},\vect{v}\in X$ and $\forall s\in \mathbb{R}$, we have:
+\begin{equation*}
+\begin{cases}
+    \vect{u} \cdot \vect{v} &= \vect{v} \cdot \vect{u} \\
+    \vect{u} \cdot \left( \vect{v}+\vect{w} \right) &= \vect{u} \cdot \vect{v} + \vect{u} \cdot \vect{w} \\
+    s\left( \vect{u} \cdot \vect{v} \right) &= \left( s\vect{u} \right)\cdot \vect{v}=\vect{u} \cdot \left( s\vect{v} \right) \\
+    \vect{u} \cdot \vect{u} & \geqslant 0 \\
+    \vect{u} \cdot \vect{u} = 0 \Leftrightarrow \vect{u}=0
+\end{cases}
+\end{equation*}
+then $X$ is called inner product space. The binary operation $\cdot$ is called inner product.\par 
+Inner product is used to calculate norm of vectors. For any vector $\vect{u}\in X$, one can define norm $\norm{u}$ by \[ \norm{u}=\sqrt{\vect{u} \cdot \vect{u}} \]
+For any two vectors $\vect{u},\vect{v}\in X$, we have \[ \vect{u} \cdot \vect{v} = \norm{u}\norm{v}\cos \alpha \]
+A vector whose norm is 1, is called a unit vector. One can define a unit vector $\uvect{x}$ by the following formula: \[ \uvect{x}=\frac{1}{\norm{x}}\vect{x} \]
+\begin{example}
+Vector $\vect{x}=(-2,5,3,6)$ has inner product norm of $\norm{x}=\sqrt{(-2)^2+5^2+3^2+6^2}=\sqrt{74}$. Thus, \[ \uvect{x}=\frac{1}{\norm{x}}\vect{x}=\frac{1}{\sqrt{74}} (-2,5,3,6) \]
+\end{example}
+\subsection{Cross product}
+Let $\mathbb{R}^3$ be a vector space. If one can define a binary operation $\times \, : X \times X \rightarrow X$ (take 2 vectors and produce a vector) such that $\forall \vect{a},\vect{b}\vect{c}\in \mathbb{R}^3$, we have:
+\begin{equation}\label{cross-product}
+\vect{c}=\vect{a}\times\vect{b}=\dmtrx{\vect{i},\vect{j},\vect{k}\\a_1,a_2,a_3\\b_1,b_2,b_3}
+\end{equation}
+where $\vect{i},\vect{j},\vect{k}$ are the base vectors, and $\vect{a}=(a_1,a_2,a_3), \quad \vect{b}=(b_1,b_2,b_3)$. Note that the determinant in \eqref{cross-product} produces a vector instead of a scalar. It is also called \emph{symbolic determinant}.
+\begin{example}
+Let $\vect{a}=(1,0,5),\quad\vect{b}=(-1,2,4)$. Applying the formula \eqref{det-3matrix}, the cross product $\vect{a}\times\vect{b}$ is
+\begin{meq*}
+\vect{c}=\dmtrx{\vect{i},\vect{j},\vect{k}\\1,0,5\\-1,2,4} &=& \dmtrx{0,5\\2,1}\vect{i}-\dmtrx{1,5\\-1,1}\vect{j}+\dmtrx{1,0\\-1,2}\vect{k} \\
+&=& (-10)\vect{i}-6\vect{j}+2\vect{k}
+\end{meq*}
+which means that $\vect{c}=(-10,-6,2)$
+\end{example}
+If we draw $\vect{a},\vect{b}$ and $\vect{c}=\vect{a}\times\vect{b}$ in a right-handed three-dimensional coordinate system, $\vect{c}=$ is perpendicular to both $\vect{a}$ and $\vect{b}$.
+Moreover, if vectors $\vect{a}$ and $\vect{b}$ are considered as edges of a parallelogram then $A=\Vert\vect{a}\times\vect{b}\Vert$ is the area of that parallelogram. 
+For vectors $\vect{a},\vect{b},\vect{c}$ and scalar $k \neq 0$, we have the following properties of cros products:
+\begin{itemize}
+\item $\Vert\vect{a}\times\vect{b}\Vert = \norm{a}\norm{b}\sin\alpha$, where $\alpha=\angle (\vect{a},\vect{b})$.
+\item $\vect{a}\times\vect{b}=-\left( \vect{b}\times\vect{a} \right)$ 
+\item $\vect{a}\times\vect{a}=\vect{0}$, where $\vect{0}$ is zero-vector (not a scalar).
+\item $\left( k\vect{a} \right)\times\vect{b}=\vect{a}\left( k\vect{b} \right)=k\left( \vect{a}\times\vect{b} \right)$
+\item $\vect{c}\times\left( \vect{a}+\vect{b} \right)=\vect{c}\times\vect{a}+\vect{c}\times\vect{b}$
+\item Cross product is not associative, $\vect{c}\times\left( \vect{a}+\vect{b} \right)$ may not equal to $\left( \vect{c}+\vect{a} \right)\times\vect{b}$.
+\end{itemize}
+\subsection{Inner product and cross product}
+Given three vectors $\vect{a}=(a_1,a_2,a_3),\vect{b}=(b_1,b_2,b_3)$ and $\vect{c}=(c_1,c_2,c_3)$. The combination of cross product and inner product as follow produces a scalar:
+\begin{equation}
+\left( \vect{a}\times\vect{b} \right)\cdot\vect{c}=\smtrx{c_1,c_2,c_3\\a_1,a_2,a_3\\b_1,b_2,b_3}
+\end{equation}
+
 \section{Matrix applications}
 \subsection{Orthogonal projection}
 The orthogonal projection of $\vect{v}$ onto the line spanned by a nonzero $\vect{s}$ (see figure \ref{Linalg_projection}) is: 
@@ -309,7 +381,7 @@ If $m=n$, we can use three methods mentioned in section \ref{linear-eq}. However
 \begin{equation}\label{least-square}
 \vect{x}=\inverse{\trans{A}\vect{A}}\trans{A}\vect{b}
 \end{equation}
-The matrix equation now can be solved with the minimum error, meaning $\norm{\vect{A}\vect{x}-\vect{b}}$ is minimum. Using formula \eqref{least-square} to solve a system of equations is called The method of linear least squares.
+The matrix equation now can be solved with the minimum error, meaning $\norm{\vect{A}\vect{x}-\vect{b}}$ is minimum. Using formula \eqref{least-square} to solve a system of equations is called The method of linear least squares. See exercise \ref{least-square} as an example.
 \subsection{Rotation}
 In linear algebra, a rotation matrix is a matrix that is used to perform a rotation in Euclidean space.
 \subsubsection{In two dimensions}
@@ -327,6 +399,8 @@ So the new coordinates $\left( x',y' \right)$ of the point $\left( x,y \right)$ 
 \subsubsection{In three dimensions}
 A basic rotation (also called elemental rotation) is a rotation about one of the axes of a Coordinate system. The following three basic rotation matrices rotate vectors by an angle $\theta$ about the x-, y-, or z-axis, in three dimensions, using the right-hand rule:
 \[ {\begin{alignedat}{1}R_{x}(\theta )&={\begin{bmatrix}1&0&0\\0&\cos \theta &-\sin \theta \\[3pt]0&\sin \theta &\cos \theta \\[3pt]\end{bmatrix}}\\[6pt]R_{y}(\theta )&={\begin{bmatrix}\cos \theta &0&\sin \theta \\[3pt]0&1&0\\[3pt]-\sin \theta &0&\cos \theta \\\end{bmatrix}}\\[6pt]R_{z}(\theta )&={\begin{bmatrix}\cos \theta &-\sin \theta &0\\[3pt]\sin \theta &\cos \theta &0\\[3pt]0&0&1\\\end{bmatrix}}\end{alignedat}}\]
+
+
 \section{Exercises}
 \begin{exercise}
 Consider an object living in 3D real place. Its current position is $P(2,5,3)$. The object is heading towards the point $Q(4,10,5)$, and moves to that direction exactly 3 length units. Calculate the position of this object after movement.
@@ -356,7 +430,7 @@ The area of the parallelogram is the absolute value of the determinant of $\vect
 Suppose we want to draw a best fitting line through three points (4,-2), (5,0), (5,-1), (6,4), (7,5) and (8,5) so a linear function $y=t+kx$ should be given. Determine this function by means of the Method of Least Squares (LSM). Perform calculations by SAGE then plot points and the line in the same coordinate system.
 \end{exercise}
 
-\begin{solution}
+\begin{solution}\label{least-square}
 The linear function $y=kx+t$ should satisfies the following system of equations with the minimum error:
 \begin{equation}
 \label{LSM-linear}
@@ -387,20 +461,17 @@ show(S+P)
 \end{verbatim}
 \begin{tikzpicture}
 \begin{axis}
-[
+[%The axis
     axis lines = middle,
     xlabel = {$x$}, ylabel = {$y$},
     xmin=-3,ymin=-3,xmax=10,ymax=6
 ]
-%Below the red parabola is defined
-\addplot [
+\addplot [%The line
     domain=3:10, 
     color=red,
 ]
 {131/65*x-129/13};
-
-%Here the blue parabloa is defined
-\addplot[color=blue,mark=square]
+\addplot[color=blue,mark=square]%The points
 coordinates {
 (4,-2) (5,0) (5,-1) (6,4) (7,5) (8,5)
 };
@@ -409,7 +480,7 @@ coordinates {
 \end{solution}
 
 \begin{exercise}
-Suppose we want to draw a best 4th order polynomial line through 6 points $(7,9),(6,12),(4,4),(2,-1),(-1,0),(6,16)$.% Determine this function by means of the Method of Least Squares (LSM). Perform calculations by SAGE and plot the points and the line in the same coordinate system.
+Suppose we want to draw a best 4th order polynomial line through 6 points $(7,9),(6,12),(4,4),(2,-1),(-1,0),(6,16)$. Determine this function by means of the Method of Least Squares (LSM). Perform calculations by SAGE and plot the points and the line in the same coordinate system.
 \end{exercise}
 
 \begin{solution}
@@ -461,18 +532,8 @@ Suppose we have a cube in $\mathbb{R}^3$ such that the vertices are at the point
 \end{exercise}
 
 \begin{solution}
-We write each point of the cube as a column in a single matrix $C_0$:
+We write each point of the cube as a column in a single matrix $\vect{C}$:
 \[ \vect{C}=\smtrx{0,0,0,0,1,1,1,1\\0,0,1,1,0,0,1,1\\0,1,0,1,0,1,0,1} \]
 The center of the cube is $C_0=(1/2,1/2,1/2)$. The function $f$ moves the origin of the coordinate from point O(0,0,0) to $C_0$. According to exercise \ref{change-origin}, that function is 
 \[ f(\vect{C})=\vect{C} - \cvect{1/2,1/2,1/2}\rvect{1,1,1,1,1,1,1,1} \]
-\end{solution}
-
-\begin{exercise}
-Suppose points (0,4),(1,8),(1,10),(2,5),(2,6), (8,10) and (6,10) are given. Approximate the points by a real trigonometric polynomial of degree 2. Plot the points and the
-graph of this function in the same coordinate system. 
-\end{exercise}
-
-\begin{solution}
-Suppose points (0,4),(1,8),(1,10),(2,5),(2,6), (8,10) and (6,10) are given. Approximate the points by a real trigonometric polynomial of degree 2. Plot the points and the
-graph of this function in the same coordinate system. 
 \end{solution}
