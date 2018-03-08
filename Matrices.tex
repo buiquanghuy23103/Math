@@ -274,7 +274,8 @@ Let us start to find $\vect{x}$ such that
 \Leftrightarrow \vect{A}\vect{x}-\lambda\vect{x} &=& \vect{0} \\
 \Leftrightarrow \left( \vect{A}-\lambda\vect{I} \right)\vect{x} &=& \vect{0} \\
 \end{meq*}
-where $\vect{I}$ is the identity matrix living in the same vector space with $\vect{A}$. There are infinite number of solutions for $\vect{x}$ if there exists $\lambda$ that makes $\det \left( \vect{A}-\lambda\vect{I} \right) =0$. In that case, $\lambda$ is called eigenvalue associated with the eigenvector $\vect{x}$.
+where $\vect{I}$ is the identity matrix living in the same vector space with $\vect{A}$. There are infinite number of solutions for $\vect{x}$ if there exists $\lambda$ that makes $\det \left( \vect{A}-\lambda\vect{I} \right) =0$. In that case, $\lambda$ is called eigenvalue associated with the eigenvector $\vect{x}$.\par 
+\note There are no more than $n$ distinct eigenvalues for an n-square matrix.
 \begin{example}
 To calculate the eigenvalues and eigenvectors of $\vect{A}=\smtrx{2,1\\1,4}$, we need to solve the following equation:
 \begin{meq*}
@@ -294,7 +295,10 @@ If the eigenvalue is ${\lambda}_1=3+\sqrt{2}$, then
 \end{IEEEeqnarray*}
 Eigenvectors corresponding to ${\lambda}_1=3+\sqrt{2}$ are
 \[ \vect{x}=\cvect{1,1+\sqrt{2}}k, \quad k\in\mathbb{R}\backslash\lbrace 0 \rbrace \]
+Likewise, If the eigenvalue is ${\lambda}_1=3-\sqrt{2}$, then the corresponding eigenvectors are
+\[ \vect{x}=\cvect{1,1-\sqrt{2}}k, \quad k\in\mathbb{R}\backslash\lbrace 0 \rbrace \]
 \end{example}
+\note The sum of diagonal members of the matrix equals to the sum of eigenvalues.
 \section{Vector operations}
 \subsection{Inner product}
 Let $X$ be a vector space. If one can define a binary operation $\cdot \, : X \times X \rightarrow \mathbb{R}$ (take 2 vectors and produce a scalar) such that $\forall \vect{w},\vect{u},\vect{v}\in X$ and $\forall s\in \mathbb{R}$, we have:
@@ -328,8 +332,7 @@ Let $\vect{a}=(1,0,5),\quad\vect{b}=(-1,2,4)$. Applying the formula \eqref{det-3
 \end{meq*}
 which means that $\vect{c}=(-10,-6,2)$
 \end{example}
-If we draw $\vect{a},\vect{b}$ and $\vect{c}=\vect{a}\times\vect{b}$ in a right-handed three-dimensional coordinate system, $\vect{c}=$ is perpendicular to both $\vect{a}$ and $\vect{b}$.
-Moreover, if vectors $\vect{a}$ and $\vect{b}$ are considered as edges of a parallelogram then $A=\Vert\vect{a}\times\vect{b}\Vert$ is the area of that parallelogram. 
+If we draw $\vect{a},\vect{b}$ and $\vect{c}=\vect{a}\times\vect{b}$ in a right-handed three-dimensional coordinate system, then $\vect{c}$ is perpendicular to both $\vect{a}$ and $\vect{b}$. Moreover, if vectors $\vect{a}$ and $\vect{b}$ are considered as edges of a parallelogram then $A=\Vert\vect{a}\times\vect{b}\Vert$ is the area of that parallelogram.\par 
 For vectors $\vect{a},\vect{b},\vect{c}$ and scalar $k \neq 0$, we have the following properties of cros products:
 \begin{itemize}
 \item $\Vert\vect{a}\times\vect{b}\Vert = \norm{a}\norm{b}\sin\alpha$, where $\alpha=\angle (\vect{a},\vect{b})$.
@@ -337,7 +340,7 @@ For vectors $\vect{a},\vect{b},\vect{c}$ and scalar $k \neq 0$, we have the foll
 \item $\vect{a}\times\vect{a}=\vect{0}$, where $\vect{0}$ is zero-vector (not a scalar).
 \item $\left( k\vect{a} \right)\times\vect{b}=\vect{a}\left( k\vect{b} \right)=k\left( \vect{a}\times\vect{b} \right)$
 \item $\vect{c}\times\left( \vect{a}+\vect{b} \right)=\vect{c}\times\vect{a}+\vect{c}\times\vect{b}$
-\item Cross product is not associative, $\vect{c}\times\left( \vect{a}+\vect{b} \right)$ may not equal to $\left( \vect{c}+\vect{a} \right)\times\vect{b}$.
+\item Cross product is not associative, $\vect{c}\times\left( \vect{a}\times\vect{b} \right)$ may not equal to $\left( \vect{c}\times\vect{a} \right)\times\vect{b}$.
 \end{itemize}
 \subsection{Inner product and cross product}
 Given three vectors $\vect{a}=(a_1,a_2,a_3),\vect{b}=(b_1,b_2,b_3)$ and $\vect{c}=(c_1,c_2,c_3)$. The combination of cross product and inner product as follow produces a scalar:
