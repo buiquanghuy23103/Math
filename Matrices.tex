@@ -274,23 +274,23 @@ Let us start to find $\vect{x}$ such that
 \Leftrightarrow \vect{A}\vect{x}-\lambda\vect{x} &=& \vect{0} \\
 \Leftrightarrow \left( \vect{A}-\lambda\vect{I} \right)\vect{x} &=& \vect{0} \\
 \end{meq*}
-where $\vect{I}$ is the identity matrix living in the same vector space with $\vect{A}$. There are infinite number of solutions for $\vect{x}$ if there exists $\lambda$ that makes $\det \left( \vect{A}-\lambda\vect{I} \right) =0$. In that case, $\lambda$ is called eigenvalue associated with the eigenvector $\vect{x}$.\par 
+where $\vect{I}$ is the identity matrix living in the same vector space with $\vect{A}$. There are infinite number of solutions for $\vect{x}$ if there exists $\lambda$ that makes $\det \left( \vect{A}-\lambda\vect{I} \right) =\vect{0}$. In that case, $\lambda$ is called eigenvalue associated with the eigenvector $\vect{x}$.\par 
 \note There are no more than $n$ distinct eigenvalues for an n-square matrix.
 \begin{example}
 To calculate the eigenvalues and eigenvectors of $\vect{A}=\smtrx{2,1\\1,4}$, we need to solve the following equation:
 \begin{meq*}
-\det \left( \vect{A}-\lambda\vect{I} \right) =0 &\Leftrightarrow & \dmtrx{2-\lambda,1\\1,4-\lambda}=0 \\
+\det \left( \vect{A}- \lambda\vect{I} \right) =0 &\Leftrightarrow & \dmtrx{2-\lambda,1\\1,4-\lambda}=0 \\
 \Leftrightarrow (2-\lambda)(4-\lambda)=0 &\Leftrightarrow & {\lambda}^2-6\lambda +7=0 \\
 \Leftrightarrow {\lambda}_1=3+\sqrt{2} &\quad\text{and}\quad & {\lambda}_2=3-\sqrt{2}
 \end{meq*}
 If the eigenvalue is ${\lambda}_1=3+\sqrt{2}$, then 
 \begin{IEEEeqnarray*}{l}
-\left( \vect{A}-\lambda\vect{I} \right)\vect{x} = \vect{0} \\
+\left( \vect{A} - \left(3+\sqrt{2}\right) \vect{I} \right)\vect{x} = \vect{0} \\
 \smtrx{-1-\sqrt{2},1\\1,1-\sqrt{2}}\cvect{x_1,x_2}=\vect{0}\\
 \Leftrightarrow 
 	\begin{cases}
-	    \left( -1-\sqrt{2} \right) \right)x_1+x_2 &=0\\
-	    x_1+\left( 1-\sqrt{2} \right) \right)x_2 &=0
+	    \left( -1-\sqrt{2} \right)x_1+x_2 &=0\\
+	    x_1+\left( 1-\sqrt{2} \right)x_2 &=0
 	\end{cases}\\
 \Leftrightarrow x_1 = \left( 1+\sqrt{2} \right)x_2	
 \end{IEEEeqnarray*}
