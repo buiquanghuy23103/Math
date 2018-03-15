@@ -286,10 +286,11 @@ To calculate the eigenvalues and eigenvectors of $\vect{A}=\smtrx{2,1\\1,4}$, we
 If the eigenvalue is ${\lambda}_1=3+\sqrt{2}$, then 
 \begin{IEEEeqnarray*}{l}
 \left( \vect{A}-\lambda\vect{I} \right)\vect{x} = \vect{0} \\
+\smtrx{-1-\sqrt{2},1\\1,1-\sqrt{2}}\cvect{x_1,x_2}=\vect{0}\\
 \Leftrightarrow 
 	\begin{cases}
-	    \left( 2-\left( 3+\sqrt{2} \right) \right)x_1+x_2 &=0\\
-	    x_1+\left( 2-\left( 3+\sqrt{2} \right) \right)x_2 &=0
+	    \left( -1-\sqrt{2} \right) \right)x_1+x_2 &=0\\
+	    x_1+\left( 1-\sqrt{2} \right) \right)x_2 &=0
 	\end{cases}\\
 \Leftrightarrow x_1 = \left( 1+\sqrt{2} \right)x_2	
 \end{IEEEeqnarray*}
@@ -538,5 +539,5 @@ Suppose we have a cube in $\mathbb{R}^3$ such that the vertices are at the point
 We write each point of the cube as a column in a single matrix $\vect{C}$:
 \[ \vect{C}=\smtrx{0,0,0,0,1,1,1,1\\0,0,1,1,0,0,1,1\\0,1,0,1,0,1,0,1} \]
 The center of the cube is $C_0=(1/2,1/2,1/2)$. The function $f$ moves the origin of the coordinate from point O(0,0,0) to $C_0$. According to exercise \ref{change-origin}, that function is 
-\[ f(\vect{C})=\vect{C} - \cvect{1/2,1/2,1/2}\rvect{1,1,1,1,1,1,1,1} \]
+\[ f(\vect{C})=\vect{C} - \cvect{1/2,1/2,1/2}\rvect{1,1,1,1,1,1,1,1}\qedhere \]
 \end{solution}
