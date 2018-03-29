@@ -140,3 +140,106 @@ Replace the first row by $R_1 \leftarrow R_2+ \frac{2}{7} R_1$
 \end{equation*}
 Thus, $x_1=1$ and $x_2=48/32$.
 \end{example}
+\section{Linear least squares}
+Let $\vect{A}$ be an $m\times n$ matrix, $\vect{x}$ be an $n\times 1$ matrix and b be an $m\times 1$ matrix. Solve the matrix equation $\vect{A}\vect{x}=\vect{b}$.\par 
+If $m=n$, we can use three methods mentioned in section \ref{linear-eq}. However, if $m>n$, the the solution usually does not exist. But if the columns of $\vect{A}$ form a linearly independent set, then 
+\begin{equation}
+\dt{\trans{A}\vect{A}}\neq 0 \quad \text{and} \quad \trans{A}\vect{A}\vect{x}=\trans{A}\vect{b}
+\end{equation}
+\begin{equation}\label{least-square}
+\vect{x}=\inverse{\trans{A}\vect{A}}\trans{A}\vect{b}
+\end{equation}
+The matrix equation now can be solved with the minimum error, meaning $\norm{\vect{A}\vect{x}-\vect{b}}$ is minimum. Using formula \eqref{least-square} to solve a system of equations is called The method of linear least squares. See exercise \ref{least-square} as an example.
+\begin{exercise}
+Suppose we want to draw a best fitting line through three points (4,-2), (5,0), (5,-1), (6,4), (7,5) and (8,5) so a linear function $y=t+kx$ should be given. Determine this function by means of the Method of Least Squares (LSM). Perform calculations by SAGE then plot points and the line in the same coordinate system.
+\end{exercise}
+
+\section{Exercise}
+\begin{solution}\label{least-square}
+The linear function $y=kx+t$ should satisfies the following system of equations with the minimum error:
+\begin{equation}
+\label{LSM-linear}
+\begin{cases}
+4k+t &= -2 \\
+5k+t &= 0 \\
+5k+t &= -1 \\
+6k+t &= 4 \\
+7k+t &= 5 \\
+8k+t &= 5 
+\end{cases}
+\end{equation}
+The equivalent matrix equation of \eqref{LSM-linear} is $\vect{A}\vect{x}=\vect{b}$, where
+\[ \vect{A}=\smtrx{4,1\\5,1\\5,1\\6,1\\7,1\\8,1} \quad \vect{x}=\cvect{k,t} \quad \vect{b}=\cvect{-2,0,-1,4,5,5} \]
+Using formula \eqref{least-square}, we now can perform calculations by SAGE as follow:
+\begin{verbatim}
+A=matrix([[4,1], [5,1], [5,1], [6,1], [7,1], [8,1]])
+b=matrix([ [-2,0,-1,4,5,5] ]).T
+x=(A.T*A).inverse() * (A.T*b)
+
+k=x[0][0]
+t=x[1][0]
+z=var("z")
+
+S=plot(k*z+t, (z,-1,9))
+P = scatter_plot([[4,-2], [5,0], [5,-1], [6,4], [7,5], [8,5]])
+show(S+P)
+\end{verbatim}
+\begin{tikzpicture}
+\begin{axis}
+[%The axis
+    axis lines = middle,
+    xlabel = {$x$}, ylabel = {$y$},
+    xmin=-3,ymin=-3,xmax=10,ymax=6
+]
+\addplot [%The line
+    domain=3:10, 
+    color=red,
+]
+{131/65*x-129/13};
+\addplot[color=blue,mark=square]%The points
+coordinates {
+(4,-2) (5,0) (5,-1) (6,4) (7,5) (8,5)
+};
+\end{axis}
+\end{tikzpicture}
+\end{solution}
+
+\begin{exercise}
+Suppose we want to draw a best 4th order polynomial line through 6 points $(7,9),(6,12),(4,4),(2,-1),(-1,0),(6,16)$. Determine this function by means of the Method of Least Squares (LSM). Perform calculations by SAGE and plot the points and the line in the same coordinate system.
+\end{exercise}
+
+\begin{solution}
+We need to find the coefficients of the following polynomial
+\[ y=mx^4+nx^3+px^2+qx+r \]
+Substitue $x$ and $y$ to this polynomial, we obtain a system of equations:
+\begin{equation*}
+\begin{cases}
+2401m+343n+49p+7q+r &=9\\
+1296m+216n+36p+6q+r &=12\\
+256m+64n+16p+4q+r &=4\\
+16m+8n+4p+2q+r &=-1\\
+m-n+p-q+r&=0\\
+1296m+216n+36p+6q+r &=16
+\end{cases}
+\end{equation*}
+,which is equivalent to the follwoing matrix equation
+\[ \smtrx{2401,343,49,7,1\\1296,216,36,6,1\\256,64,16,4,1\\16,8,4,2,1\\1,-1,1,-1,1\\1296,216,36,6,1} \cvect{m,n,p,q,r} = \cvect{9,12,4,-1,0,16} \]
+Using formula \eqref{least-square}, we now can perform calculations by SAGE as follow:
+\begin{verbatim}
+A=matrix([[2401,343,49,7,1],[1296,216,36,6,1],[256,64,16,4,1],
+        [16,8,4,2,1],[1,-1,1,-1,1],[1296,216,36,6,1]])
+b=matrix([[9,12,4,-1,0,16]]).T
+x=(A.T*A).inverse() * (A.T*b) 
+
+m=x[0][0]
+n=x[1][0]
+p=x[2][0]
+q=x[3][0]
+r=x[4][0]
+
+z=var("z")
+S=plot(m*z**4+n*z**3+p*z*z+q*z+r, (z,-2,8))
+P = scatter_plot([[7,9],[6,12],[4,4],[2,-1],[-1,0],[6,16]])
+show(S+P)
+\end{verbatim}
+\end{solution}

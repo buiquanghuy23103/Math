@@ -4,13 +4,12 @@
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[english]{babel}
 \RequirePackage{amsmath,amsfonts,amssymb,amsthm}%Math formulae
-\RequirePackage{graphicx,xcolor} % Graphics and colors
-\RequirePackage{subfigure}
+\RequirePackage{graphicx,xcolor,subfigure} % Graphics and colors
 \RequirePackage{rotating} % To display tables in landscape
 \RequirePackage{setspace} % 
 \RequirePackage{appendix}
-\RequirePackage{fancyhdr}%Fancy headers
-\RequirePackage{subfigure}
+\RequirePackage{fancyhdr} % Allow customizing header, footer
+\RequirePackage{listing}  % Wrap code, code caption
 \RequirePackage[pdftex,bookmarks,colorlinks]{hyperref}%To have the bookmark list open and links in colour
     \ifx\HCode\UnDef\else\hypersetup{tex4ht}\fi
 \RequirePackage{booktabs}%Table
@@ -18,24 +17,35 @@
 %====GRAPHIC==========
 \graphicspath{{./pictures/}}
 %====HEADERS======
-\pagestyle{fancy}
-% with this we ensure that the chapter and section
-% headings are in lowercase.
+%\pagestyle{fancy}
+%% with this we ensure that the chapter and section
+%% headings are in lowercase.
+%\renewcommand{\chaptermark}[1]{%
+%\markboth{#1}{}}
+%\renewcommand{\sectionmark}[1]{%
+%\markright{\thesection\ #1}}
+%\fancyhf{} % delete current header and footer
+%\fancyhead[LE,RO]{\bfseries\thepage}
+%\fancyhead[LO]{\bfseries\rightmark}
+%\fancyhead[RE]{\bfseries\leftmark}
+%\renewcommand{\headrulewidth}{0.5pt}
+%\renewcommand{\footrulewidth}{0pt}
+%\addtolength{\headheight}{0.5pt} % space for the rule
+%\fancypagestyle{plain}{%
+%\fancyhead{} % get rid of headers on plain pages
+%\renewcommand{\headrulewidth}{0pt} % and the line
+%}
+%====HEADERS======
+\pagestyle{fancy} % Allow customizing header, footer
+\fancyhead{} \fancyfoot{} % Reset to default header, footer
 \renewcommand{\chaptermark}[1]{%
 \markboth{#1}{}}
 \renewcommand{\sectionmark}[1]{%
 \markright{\thesection\ #1}}
-\fancyhf{} % delete current header and footer
-\fancyhead[LE,RO]{\bfseries\thepage}
-\fancyhead[LO]{\bfseries\rightmark}
-\fancyhead[RE]{\bfseries\leftmark}
-\renewcommand{\headrulewidth}{0.5pt}
-\renewcommand{\footrulewidth}{0pt}
-\addtolength{\headheight}{0.5pt} % space for the rule
-\fancypagestyle{plain}{%
-\fancyhead{} % get rid of headers on plain pages
-\renewcommand{\headrulewidth}{0pt} % and the line
-}
+\fancyhead[L]{\slshape\rightmark}
+\fancyhead[R]{\slshape \MakeUppercase{\leftmark} }
+\fancyfoot[C]{\thepage}
+
 %===============CODE LISTING=======================
 
 %Define custom colors
@@ -73,16 +83,11 @@
 } 
 \newcommand{\database}[1]
 	{\lstinputlisting[language=SQL,style=cool]{#1}}
-\newcommand{\ciscoln}[1]
-    {\texttt{#1}}
-\newenvironment{cisco}%
-{\endgraf\noindent%
-\endgraf\verbatim}%
-{\endverbatim}
 %===TABLE===============
 \newenvironment{tbl}[2][]
 	{%
 	\begin{table}[htbp]%
+	\centering
 		#1
 		\begin{tabular}{#2}
 	}
@@ -106,13 +111,14 @@
 %%%%%%%%NEW%%%COMMAND%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\note}{ \textit{Note!} }
 \newcommand{\osmo}{Mobile and Wireless Network}
+\newcommand{\head}[1]{ \textnormal{ \textbf{#1} } }
 \newcommand{\intro}[2]
 {\begin{tabular}{p{8cm}l}
 	\textbf{Huy Bui}		&	\textsc{#1}			\\
 	Information Technology	&	\textbf{#2}	\\
 	T5616SN					&	\today				\\
 \end{tabular}}
-
+\parindent 0ex % Remove paragraph indentation
 
 %%%%%%%%%%%END%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \endinput%
