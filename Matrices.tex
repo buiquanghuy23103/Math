@@ -188,7 +188,7 @@ For matrices $\vect{A}\vect{B}$ and scalar $k$, we have the following properties
 \begin{itemize}
 \item The operation of taking the transpose is an involution (self-inverse), meaning that $\trans{\left( \trans{A} \right)}=\vect{A}$.
 \item The transpose respects addition, $\trans{\left( \vect{A}+\vect{B} \right)}=\trans{A}+\trans{B}$.
-\item The order of the factors reverses when taking tranpose of a product matrix, $\trans{\vect{A}\vect{B}}=\trans{B}\trans{A}$. From this, one can deduce that a square matrix $\vect{A}$ is invertible if and only if its transpose $\trans{A}$ is invertible, and in this case, we have $\trans{\left( \inverse{A} \right)}=\inverse{\left( \trans{A} \right)}$.
+\item The order of the factors reverses when taking tranpose of a product matrix, $\trans{ \left(\vect{A}\vect{B}\right) }=\trans{B}\trans{A}$. From this, one can deduce that a square matrix $\vect{A}$ is invertible if and only if its transpose $\trans{A}$ is invertible, and in this case, we have $\trans{\left( \inverse{A} \right)}=\inverse{\left( \trans{A} \right)}$.
 \item $\trans{\left( c\vect{A} \right)}=c\trans{A}$.
 \end{itemize}
 
@@ -320,15 +320,15 @@ A vector whose norm is 1, is called a unit vector. One can define a unit vector 
 Vector $\vect{x}=(-2,5,3,6)$ has inner product norm of $\norm{x}=\sqrt{(-2)^2+5^2+3^2+6^2}=\sqrt{74}$. Thus, \[ \uvect{x}=\frac{1}{\norm{x}}\vect{x}=\frac{1}{\sqrt{74}} (-2,5,3,6) \]
 \end{example}
 \subsection{Cross product}
-Let $\mathbb{R}^3$ be a vector space. If one can define a binary operation $\times \, : X \times X \rightarrow X$ (take 2 vectors and produce a vector) such that $\forall \vect{a},\vect{b}\vect{c}\in \mathbb{R}^3$, we have:
+Let $\mathbb{R}^3$ be a vector space. If one can define a binary operation $\times \, : X \times X \rightarrow X$ (take 2 vectors and produce a vector) such that $\forall \vect{a},\vect{b},\vect{c}\in \mathbb{R}^3$, we have:
 \begin{equation}\label{cross-product}
 \vect{c}=\vect{a}\times\vect{b}=\dmtrx{\vect{i},\vect{j},\vect{k}\\a_1,a_2,a_3\\b_1,b_2,b_3}
 \end{equation}
 where $\vect{i},\vect{j},\vect{k}$ are the base vectors, and $\vect{a}=(a_1,a_2,a_3), \quad \vect{b}=(b_1,b_2,b_3)$. Note that the determinant in \eqref{cross-product} produces a vector instead of a scalar. It is also called \emph{symbolic determinant}.
 \begin{example}
-Let $\vect{a}=(1,0,5),\quad\vect{b}=(-1,2,4)$. Applying the formula \eqref{det-3matrix}, the cross product $\vect{a}\times\vect{b}$ is
+Let $\vect{a}=(1,0,5),\quad\vect{b}=(-1,2,1)$. Applying the formula \eqref{det-3matrix}, the cross product $\vect{a}\times\vect{b}$ is
 \begin{meq*}
-\vect{c}=\dmtrx{\vect{i},\vect{j},\vect{k}\\1,0,5\\-1,2,4} &=& \dmtrx{0,5\\2,1}\vect{i}-\dmtrx{1,5\\-1,1}\vect{j}+\dmtrx{1,0\\-1,2}\vect{k} \\
+\vect{c}=\dmtrx{\vect{i},\vect{j},\vect{k}\\1,0,5\\-1,2,1} &=& \dmtrx{0,5\\2,1}\vect{i}-\dmtrx{1,5\\-1,1}\vect{j}+\dmtrx{1,0\\-1,2}\vect{k} \\
 &=& (-10)\vect{i}-6\vect{j}+2\vect{k}
 \end{meq*}
 which means that $\vect{c}=(-10,-6,2)$
@@ -339,15 +339,14 @@ For vectors $\vect{a},\vect{b},\vect{c}$ and scalar $k \neq 0$, we have the foll
 \item $\Vert\vect{a}\times\vect{b}\Vert = \norm{a}\norm{b}\sin\alpha$, where $\alpha=\angle (\vect{a},\vect{b})$.
 \item $\vect{a}\times\vect{b}=-\left( \vect{b}\times\vect{a} \right)$ 
 \item $\vect{a}\times\vect{a}=\vect{0}$, where $\vect{0}$ is zero-vector (not a scalar).
-\item $\left( k\vect{a} \right)\times\vect{b}=\vect{a}\left( k\vect{b} \right)=k\left( \vect{a}\times\vect{b} \right)$
+\item $\left( k\vect{a} \right)\times\vect{b}=\vect{a}\times\left( k\vect{b} \right)=k\left( \vect{a}\times\vect{b} \right)$
 \item $\vect{c}\times\left( \vect{a}+\vect{b} \right)=\vect{c}\times\vect{a}+\vect{c}\times\vect{b}$
 \item Cross product is not associative, $\vect{c}\times\left( \vect{a}\times\vect{b} \right)$ may not equal to $\left( \vect{c}\times\vect{a} \right)\times\vect{b}$.
+\item Given three vectors $\vect{a}=(a_1,a_2,a_3),\vect{b}=(b_1,b_2,b_3)$ and $\vect{c}=(c_1,c_2,c_3)$. The combination of cross product and inner product as follow produces a scalar:
+	\begin{equation}
+	\left( \vect{a}\times\vect{b} \right)\cdot\vect{c}=\dmtrx{c_1,c_2,c_3\\a_1,a_2,a_3\\b_1,b_2,b_3}
+	\end{equation}
 \end{itemize}
-\subsection{Inner product and cross product}
-Given three vectors $\vect{a}=(a_1,a_2,a_3),\vect{b}=(b_1,b_2,b_3)$ and $\vect{c}=(c_1,c_2,c_3)$. The combination of cross product and inner product as follow produces a scalar:
-\begin{equation}
-\left( \vect{a}\times\vect{b} \right)\cdot\vect{c}=\smtrx{c_1,c_2,c_3\\a_1,a_2,a_3\\b_1,b_2,b_3}
-\end{equation}
 
 \section{Matrix applications}
 \subsection{Orthogonal projection}

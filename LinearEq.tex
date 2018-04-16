@@ -54,11 +54,12 @@ We have $s_1\vect{u} + s_2\vect{v} = \overline{0}$ is equivalent to
 \end{equation*}
 All of these equations are equivalent to $s_1+6s_2=0$. There are an infinite number of solutions to this equations, which does not satisfies \eqref{ex1-5}.
 \end{example}
-Let $X$ be a vector space and the set $A \subseteq X$ is linearly independent. If any vectors $\vect{u}\in X$ is a linear combination of vectors in $A$, then $A$ is a \emph{base of X}. 
+Let $X$ be a vector space and the set $A \subseteq X$ is linearly independent. If any vectors $\vect{u}\in X$ is a linear combination of vectors in $A$, then $A$ is a \emph{base of X}. Any set which you can prove is linearly independent and its span is the whole space, is a basis of the vector space.
+
 \section{System of linear equations}
 \label{linear-eq}
 Given $\vect{A}$ an n-square matrix and two column vectors $\vect{x}=\rvect{x_1,x_2,\ldots ,x_n}^T$ and $\vect{b}=\rvect{b_1,b_2,\ldots ,b_n}^T$. The system of n linear equations in n unknowns is equivalent to the matrix equation: \[ \vect{A}\vect{x}=\vect{b} \]
-The matrix $\vect{A}$ is called the \emph{coefficient matrix}. The properties of this matrix, especially determinant, decide the solution of the equation.\par The collection of all columns in $\vect{A}$ form a lineary independent set (rank of $\vect{A}$ is n) if and only if $\dt{A}\neq 0$. This also means that there exists a unique solution for the equation. On the other hand, if $\dt{A}=0$, then either of two cases occurs: the system has no solutions, or there are an infinite number of solutions.\par There are many ways to solve a system of equations, however, in this notebook, only three solutions related to matrix are mentioned: Inverse matrix, Crammer's rule, Gaussian elimination.
+The matrix $\vect{A}$ is called the \emph{coefficient matrix}. The collection of all columns in $\vect{A}$ form a lineary independent set (rank of $\vect{A}$ is n) iff $\dt{A}\neq 0$. This also means that there exists a unique solution for the equation. On the other hand, if $\dt{A}=0$, then either of two cases occurs: the system has no solutions, or there are an infinite number of solutions. This notebook introduces three matrix-related solutions to solve System of linear equations: Inverse matrix, Crammer's rule, Gaussian elimination.
 \subsection{Inverse matrix}
 Given the matrix equation $\vect{A}\vect{x}=\vect{b}$ where $\vect{A}$ is an n-square matrix, $\vect{x}=\rvect{x_1,x_2,\ldots ,x_n}^T$ and $\vect{b}=\rvect{b_1,b_2,\ldots ,b_n}^T$. If  $\dt{A}\neq 0$, then $\vect{A}$ is invertible and there is a unique solution to the equation: \[ \vect{x}=\inverse{A}\vect{b} \]
 Observe that this method only works if the determinant of the coefficient matrix is nonzero.
@@ -91,7 +92,8 @@ The system of equation \eqref{apple} can solved using Crammer's rule as follow:
 \end{meq*}
 \end{example}
 \subsection{Gaussian elimination}
-Gaussian elimination (also known as row reduction) is an algorithm for solving systems of linear equations. It is usually understood as a sequence of operations performed on the corresponding matrix of coefficients. This method can also be used to find the rank of a matrix, to calculate the determinant of a matrix, and to calculate the inverse of an invertible square matrix.\par
+Gaussian elimination is usually understood as a sequence of operations performed on the corresponding matrix of coefficients. This method can be used to solve system of equations, find the rank of a matrix, calculate the determinant of a matrix, and calculate the inverse of an invertible square matrix.\\
+
 To perform Gaussian elimination, one uses a sequence of elementary row operations to modify the matrix until the lower left-hand corner of the matrix is filled with zeros, as much as possible. There are three types of elementary row operations:
 \begin{itemize}
 \item Swap the positions of two rows.
@@ -141,20 +143,24 @@ Replace the first row by $R_1 \leftarrow R_2+ \frac{2}{7} R_1$
 Thus, $x_1=1$ and $x_2=48/32$.
 \end{example}
 \section{Linear least squares}
-Let $\vect{A}$ be an $m\times n$ matrix, $\vect{x}$ be an $n\times 1$ matrix and b be an $m\times 1$ matrix. Solve the matrix equation $\vect{A}\vect{x}=\vect{b}$.\par 
-If $m=n$, we can use three methods mentioned in section \ref{linear-eq}. However, if $m>n$, the the solution usually does not exist. But if the columns of $\vect{A}$ form a linearly independent set, then 
-\begin{equation}
-\dt{\trans{A}\vect{A}}\neq 0 \quad \text{and} \quad \trans{A}\vect{A}\vect{x}=\trans{A}\vect{b}
-\end{equation}
+\textbf{Problem:} Let $\vect{A}$ be an $m\times n$ matrix, $\vect{x}$ be an $n\times 1$ matrix and b be an $m\times 1$ matrix. Solve the matrix equation $\vect{A}\vect{x}=\vect{b}$.\\
+ 
+\textbf{Solution:} If $m=n$, we can use three methods mentioned in section \ref{linear-eq}. However, if $m>n$, the solution usually does not exist. In that case, if $\dt{\vect{A}} \neq 0$, then 
+
+\begin{equation*}
+\trans{A}\vect{A}\vect{x}=\trans{A}\vect{b}
+\end{equation*}
+
 \begin{equation}\label{least-square}
-\vect{x}=\inverse{\trans{A}\vect{A}}\trans{A}\vect{b}
+\vect{x}=\left( \trans{A}\vect{A} \right)^{-1} \trans{A}\vect{b}
 \end{equation}
-The matrix equation now can be solved with the minimum error, meaning $\norm{\vect{A}\vect{x}-\vect{b}}$ is minimum. Using formula \eqref{least-square} to solve a system of equations is called The method of linear least squares. See exercise \ref{least-square} as an example.
+
+The matrix equation now can be solved with the minimum error, meaning $\norm{\vect{A}\vect{x}-\vect{b}}$ is minimum. Using formula \eqref{least-square} to solve a system of equations is called The method of linear least squares.
+
 \begin{exercise}
 Suppose we want to draw a best fitting line through three points (4,-2), (5,0), (5,-1), (6,4), (7,5) and (8,5) so a linear function $y=t+kx$ should be given. Determine this function by means of the Method of Least Squares (LSM). Perform calculations by SAGE then plot points and the line in the same coordinate system.
 \end{exercise}
 
-\section{Exercise}
 \begin{solution}\label{least-square}
 The linear function $y=kx+t$ should satisfies the following system of equations with the minimum error:
 \begin{equation}
